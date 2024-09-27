@@ -1,0 +1,59 @@
+<div class="feedback-form-container">
+    <h2>Student Feedback Form</h2>
+    <form #feedbackForm="ngForm" (ngSubmit)="onSubmit()">
+      
+      <div>
+        <label for="studentName">Student Name:</label>
+        <input id="studentName"name="studentName"[(ngModel)]="studentName" required/>
+      </div>
+  
+      <div>
+        <label for="studentNumber">Student Batch:</label>
+        <input
+          id="studentNumber"
+          name="studentNumber"
+          [(ngModel)]="studentNumber"
+          required
+        />
+      </div>
+  
+      <div>
+        <label for="feedback">Feedback:</label>
+        <textarea
+          id="feedback"
+          name="feedback"
+          [(ngModel)]="feedback"
+          required
+        ></textarea>
+      </div>
+  
+      <button type="submit" [disabled]="!studentName || !studentNumber || !feedback">
+        Submit
+      </button>
+      <button type="button" (click)="onReset()">Reset</button>
+    </form>
+  
+    <h3>Submitted Feedback</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Student Batch</th>
+          <th>Feedback</th>
+          <th>Actions</th> <!-- Add a new column for actions -->
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of feedbackList; let i = index">
+          <td>{{ entry.studentName }}</td>
+          <td>{{ entry.studentNumber }}</td>
+          <td>{{ entry.feedback }}</td>
+          <td>
+            <button (click)="onDelete(i)">Delete</button> <!-- Delete button -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
